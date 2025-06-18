@@ -1,0 +1,87 @@
+<!-- <template>
+    <lightning-card title="Volunteer Participation" icon-name="standard:people">
+        <lightning-input type="search" label="Search by Volunteer Name or Status" onchange={handleSearch}>
+        </lightning-input>
+
+        <template if:true={filteredVolunteers}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-m-top_medium">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Hours</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={filteredVolunteers} for:item="v">
+                        <tr key={v.Id}>
+                            <td>{v.Volunteer__r.Name}</td>
+                            <td>{v.Hours_Contributed__c}</td>
+                            <td>
+                                <lightning-combobox value={v.Participation_Status__c} options={statusOptions}
+                                    data-id={v.Id} placeholder={v.Participation_Status__c}
+                                    onchange={handleStatusChange}>
+                                </lightning-combobox>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+
+        <template if:true={noVolunteers}>
+            <div class="slds-notify slds-notify_alert slds-theme_warning" role="alert">
+                <lightning-icon icon-name="utility:warning" size="x-small"
+                    class="slds-m-right_x-small"></lightning-icon>
+                This event has no volunteers assigned.
+            </div>
+        </template>
+
+
+    </lightning-card>
+</template> -->
+
+<template>
+    <lightning-card title="Volunteer Participation" icon-name="standard:people">
+        <lightning-input type="search" label="Search by Volunteer Name or Status" onchange={handleSearch}>
+        </lightning-input>
+
+        <!-- Volunteer Table -->
+        <template if:true={showVolunteersTable}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-m-top_medium">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Hours</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={filteredVolunteers} for:item="v">
+                        <tr key={v.Id}>
+                            <td>{v.Volunteer__r.Name}</td>
+                            <td>{v.Hours_Contributed__c}</td>
+                            <td>{v.Volunteer__r.RecordType.Name}</td>
+                            <td>
+                                <lightning-combobox value={v.Participation_Status__c} options={statusOptions}
+                                    data-id={v.Id} disabled={isStatusEditable} placeholder={v.Participation_Status__c}
+                                    onchange={handleStatusChange}>
+                                </lightning-combobox>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+
+        <!-- No Volunteers Warning -->
+        <template if:true={noVolunteers}>
+            <div class="slds-notify slds-notify_alert slds-theme_warning" role="alert">
+                <lightning-icon icon-name="utility:warning" size="x-small"
+                    class="slds-m-right_x-small"></lightning-icon>
+                This event has no volunteers assigned.
+            </div>
+        </template>
+    </lightning-card>
+</template>

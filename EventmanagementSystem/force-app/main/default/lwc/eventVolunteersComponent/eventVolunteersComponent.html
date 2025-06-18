@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Volunteer Participation" icon-name="standard:people">
+        <lightning-input type="search" label="Search by Volunteer Name or Status" onchange={handleSearch}>
+        </lightning-input>
+
+        <template if:true={showVolunteersTable}>
+            <lightning-datatable
+                key-field="Id"
+                data={filteredVolunteers}
+                columns={columns}
+                onsort={handleSort}
+                sorted-by={sortedBy}
+                sorted-direction={sortedDirection}
+                hide-checkbox-column="true"
+                draft-values={draftValues}
+                onsave={handleSave}
+            >
+            </lightning-datatable>
+        </template>
+
+        <template if:true={noVolunteers}>
+            <div class="slds-notify slds-notify_alert slds-theme_warning" role="alert">
+                <lightning-icon icon-name="utility:warning" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                This event has no volunteers assigned.
+            </div>
+        </template>
+    </lightning-card>
+</template>
